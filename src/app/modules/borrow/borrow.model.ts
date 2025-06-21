@@ -8,7 +8,7 @@ const borrowSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Middleware to update book on borrow
+
 borrowSchema.post('save', async function (doc) {
   const Book = mongoose.model('Book');
   const book = await Book.findById(doc.book);
