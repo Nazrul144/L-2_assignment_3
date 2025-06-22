@@ -1,6 +1,18 @@
-# Library Management API 🚀
+# 📚 Library Management API
 
 A lightweight Express + TypeScript backend using MongoDB (Mongoose) to manage books and borrows.
+
+---
+
+## 📌 Core Endpoints
+
+- **`POST /api/books`** – Create a new book  
+- **`GET  /api/books`** – List books with optional `filter`, `sortBy`, `sort`, `limit`  
+- **`GET  /api/books/:bookId`** – Retrieve a single book  
+- **`PUT  /api/books/:bookId`** – Update book fields (e.g., copies)  
+- **`DELETE /api/books/:bookId`** – Remove a book  
+- **`POST /api/borrow`** – Borrow books (executes business logic)  
+- **`GET  /api/borrow`** – Get summary of all borrows via aggregation
 
 ---
 
@@ -8,7 +20,7 @@ A lightweight Express + TypeScript backend using MongoDB (Mongoose) to manage bo
 
 - **Book & Borrow schemas** with full validation (genres, ISBN uniqueness, non‑negative/range checks)
 
-# 📚 Library Management API
+---
 
 ## 🚀 Features
 
@@ -61,8 +73,12 @@ A lightweight Express + TypeScript backend using MongoDB (Mongoose) to manage bo
 - ✅ Sorting (asc/desc)
 - ✅ Pagination support via `limit` query parameter
 
-### ❌ Error Handling
+---
+
+## ❌ Error Handling
+
 All error responses follow this structure:
+
 ```json
 {
   "message": "Validation failed",
@@ -72,29 +88,3 @@ All error responses follow this structure:
     ...
   }
 }
-
----
-
-### 📌 Core Endpoints
-
-- **`POST /api/books`** – Create a new book  
-- **`GET  /api/books`** – List books with optional `filter`, `sortBy`, `sort`, `limit`  
-- **`GET  /api/books/:bookId`** – Retrieve a single book  
-- **`PUT  /api/books/:bookId`** – Update book fields (e.g., copies)  
-- **`DELETE /api/books/:bookId`** – Remove a book  
-- **`POST /api/borrow`** – Borrow books (executes business logic)  
-- **`GET  /api/borrow`** – Get summary of all borrows via aggregation
-
----
-
-## 🛠️ Highlights
-
-- Schema-based validation + standardized error responses  
-- Enforced business rules before/after DB actions  
-- Modular TypeScript code (models, routes, controllers)  
-- Aggregation demonstrates reporting capability
-
-
-
-
-
