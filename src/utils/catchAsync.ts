@@ -5,3 +5,6 @@ const catchAsync = (fn: RequestHandler) => (req: Request, res: Response, next: N
 };
 
 export default catchAsync;
+
+
+

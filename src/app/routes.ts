@@ -6,6 +6,7 @@ import { BorrowRoutes } from './modules/borrow/borrow.route';
 const router = express.Router();
 
 router.use('/books', BookRoutes);
-router.use('/borrow', BorrowRoutes);
+
+router.use(BorrowRoutes);
 
 export const routes = router;

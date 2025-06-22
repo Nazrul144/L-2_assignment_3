@@ -5,4 +5,12 @@ export interface IBorrow {
     quantity: number;
     dueDate: Date;
   }
+
+ 
+export interface IBorrowInput {
+  book: string;
+  quantity: number;
+  dueDate: string; // or Date
+}
+
   
