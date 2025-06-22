@@ -17,10 +17,10 @@ const borrow_service_1 = require("./borrow.service");
 const catchAsync_1 = __importDefault(require("../../../utils/catchAsync"));
 exports.BorrowController = {
     borrowBook: (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        const result = yield borrow_service_1.BorrowService.borrowBook(req.body.bookId);
+        const result = yield borrow_service_1.BorrowService.borrowBook(req.body.book);
         res.status(200).json({
             success: true,
-            message: 'Book borrowed successfully',
+            message: "Book borrowed successfully",
             data: result,
         });
     })),
@@ -28,7 +28,7 @@ exports.BorrowController = {
         const summary = yield borrow_service_1.BorrowService.getBorrowSummary();
         res.status(200).json({
             success: true,
-            message: 'Borrow summary retrieved successfully',
+            message: "Borrowed books summary retrieved successfully",
             data: summary,
         });
     })),

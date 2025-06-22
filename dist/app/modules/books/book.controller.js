@@ -20,7 +20,7 @@ exports.BookController = {
         const result = yield book_service_1.BookService.createBook(req.body);
         res.status(201).json({
             success: true,
-            message: 'Book created successfully',
+            message: "Book created successfully",
             data: result,
         });
     })),
@@ -34,7 +34,7 @@ exports.BookController = {
         });
         res.status(200).json({
             success: true,
-            message: 'Books retrieved successfully',
+            message: "Books retrieved successfully",
             data: result,
         });
     })),
@@ -42,7 +42,7 @@ exports.BookController = {
         const result = yield book_service_1.BookService.getSingleBook(req.params.id);
         res.status(200).json({
             success: true,
-            message: 'Book retrieved successfully',
+            message: "Book retrieved successfully",
             data: result,
         });
     })),
@@ -50,7 +50,7 @@ exports.BookController = {
         const result = yield book_service_1.BookService.updateBook(req.params.id, req.body);
         res.status(200).json({
             success: true,
-            message: 'Book updated successfully',
+            message: "Book updated successfully",
             data: result,
         });
     })),
@@ -58,7 +58,7 @@ exports.BookController = {
         yield book_service_1.BookService.deleteBook(req.params.id);
         res.status(200).json({
             success: true,
-            message: 'Book deleted successfully',
+            message: "Book deleted successfully",
             data: null,
         });
     })),

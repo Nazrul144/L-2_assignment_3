@@ -12,7 +12,11 @@ dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
-app.use('/api', routes_1.routes);
+app.use("/api", routes_1.routes);
+const getRootController = (req, res) => {
+    res.send("Weclome to the Library Management System !!!");
+};
+app.get("/", getRootController);
 const errorHandler = (err, req, res, next) => {
     res.status(500).json({
         success: false,
