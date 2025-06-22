@@ -73,10 +73,9 @@ All error responses follow this structure:
   }
 }
 
-
 ---
 
-## 📌 Core Endpoints
+### 📌 Core Endpoints
 
 - **`POST /api/books`** – Create a new book  
 - **`GET  /api/books`** – List books with optional `filter`, `sortBy`, `sort`, `limit`  
@@ -95,7 +94,7 @@ All error responses follow this structure:
 - Modular TypeScript code (models, routes, controllers)  
 - Aggregation demonstrates reporting capability
 
----
+
 
 
 
