@@ -1,23 +1,19 @@
-import mongoose from 'mongoose';
-
-const borrowSchema = new mongoose.Schema({
-  book: { type: mongoose.Schema.Types.ObjectId, ref: 'Book', required: true },
-  quantity: { type: Number, required: true, min: 1 },
-  dueDate: { type: Date, required: true }
-}, {
-  timestamps: true
-});
 
 
-borrowSchema.post('save', async function (doc) {
-  const Book = mongoose.model('Book');
-  const book = await Book.findById(doc.book);
-  if (book) {
-    book.copies -= doc.quantity;
-    if (book.copies < 0) throw new Error('Not enough copies');
-    book.available = book.copies > 0;
-    await book.save();
-  }
-});
+import mongoose, { Schema, Document } from 'mongoose';
 
-export const Borrow = mongoose.model('Borrow', borrowSchema);
+export interface IBorrowedBook extends Document {
+  book: mongoose.Types.ObjectId;
+  quantity: number;
+  dueDate: Date;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+const BorrowedBookSchema = new Schema<IBorrowedBook>({
+  book: { type: Schema.Types.ObjectId, ref: 'Book', required: true },
+  quantity: { type: Number, required: true },
+  dueDate: { type: Date, required: true },
+}, { timestamps: true });
+
+export const BorrowedBook = mongoose.model<IBorrowedBook>('BorrowedBook', BorrowedBookSchema);

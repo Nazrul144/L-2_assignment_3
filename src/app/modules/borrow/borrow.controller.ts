@@ -5,7 +5,7 @@ import catchAsync from "../../../utils/catchAsync";
 export const BorrowController = {
   borrowBook: catchAsync(async (req: Request, res: Response) => {
 
-    const result = await BorrowService.borrowBook(req.body.book);
+    const result = await BorrowService.borrowBook(req.body);
 
     res.status(200).json({
       success: true,

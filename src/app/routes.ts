@@ -7,6 +7,6 @@ const router = express.Router();
 
 router.use('/books', BookRoutes);
 
-router.use(BorrowRoutes);
+router.use("/borrow", BorrowRoutes);
 
 export const routes = router;
