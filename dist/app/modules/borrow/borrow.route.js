@@ -7,6 +7,6 @@ exports.BorrowRoutes = void 0;
 const express_1 = __importDefault(require("express"));
 const borrow_controller_1 = require("./borrow.controller");
 const router = express_1.default.Router();
-router.post('/borrow', borrow_controller_1.BorrowController.borrowBook);
-router.get('/borrow', borrow_controller_1.BorrowController.getBorrowSummary);
+router.post('/', borrow_controller_1.BorrowController.borrowBook);
+router.get('/', borrow_controller_1.BorrowController.getBorrowSummary);
 exports.BorrowRoutes = router;

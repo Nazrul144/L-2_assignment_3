@@ -11,29 +11,55 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BorrowService = void 0;
 const book_model_1 = require("../../modules/books/book.model");
+const borrow_model_1 = require("./borrow.model");
 exports.BorrowService = {
-    borrowBook: (bookId) => __awaiter(void 0, void 0, void 0, function* () {
+    borrowBook: (borrowData) => __awaiter(void 0, void 0, void 0, function* () {
+        const { book: bookId, quantity, dueDate } = borrowData;
         const book = yield book_model_1.Book.findById(bookId);
         if (!book)
-            throw new Error('Book not found');
-        if (book.copies < 1)
-            throw new Error('No copies available');
-        book.copies -= 1;
-        yield book.updateAvailability();
+            throw new Error("Book not found");
+        if (book.copies < quantity)
+            throw new Error("Not enough copies available");
+        book.copies -= quantity;
+        if (book.copies === 0)
+            book.available = false;
         yield book.save();
-        return book;
+        const borrowRecord = new borrow_model_1.BorrowedBook({
+            book: bookId,
+            quantity,
+            dueDate,
+        });
+        yield borrowRecord.save();
+        return borrowRecord;
     }),
     getBorrowSummary: () => __awaiter(void 0, void 0, void 0, function* () {
-        const result = yield book_model_1.Book.aggregate([
+        const result = yield borrow_model_1.BorrowedBook.aggregate([
             {
                 $group: {
-                    _id: '$genre',
-                    totalBooks: { $sum: 1 },
-                    totalCopies: { $sum: '$copies' },
+                    _id: "$book",
+                    totalQuantity: { $sum: "$quantity" },
                 },
             },
             {
-                $sort: { totalBooks: -1 },
+                $lookup: {
+                    from: "books",
+                    localField: "_id",
+                    foreignField: "_id",
+                    as: "bookInfo",
+                },
+            },
+            {
+                $unwind: "$bookInfo",
+            },
+            {
+                $project: {
+                    _id: 0,
+                    book: {
+                        title: "$bookInfo.title",
+                        isbn: "$bookInfo.isbn",
+                    },
+                    totalQuantity: "$totalQuantity",
+                },
             },
         ]);
         return result;

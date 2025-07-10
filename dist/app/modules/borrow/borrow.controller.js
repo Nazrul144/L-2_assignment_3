@@ -17,7 +17,7 @@ const borrow_service_1 = require("./borrow.service");
 const catchAsync_1 = __importDefault(require("../../../utils/catchAsync"));
 exports.BorrowController = {
     borrowBook: (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        const result = yield borrow_service_1.BorrowService.borrowBook(req.body.book);
+        const result = yield borrow_service_1.BorrowService.borrowBook(req.body);
         res.status(200).json({
             success: true,
             message: "Book borrowed successfully",
